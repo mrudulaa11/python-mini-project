@@ -185,6 +185,8 @@ function showConfirm(message, onConfirm, onCancel) {
   document.addEventListener('keydown', keyHandler);
 }
 
+window.showConfirm = showConfirm;
+
 var currentProjectName = "";
 
 function setupModalInfoButton(projectName) {
@@ -1242,40 +1244,7 @@ document.addEventListener("DOMContentLoaded", function () {
       removeTrap = null;
     }
     
-    recentSearchesList.innerHTML = '';
-    recentSearches.slice(0, 5).forEach((search) => {
-        const item = document.createElement('div');
-        item.className = 'dropdown-recent-item';
-        item.innerHTML = `
-            <button type="button" class="dropdown-recent-text" aria-label="Search ${search}">
-                <i class="fas fa-history" style="opacity: 0.5; font-size: 0.9rem;"></i>
-                <span style="flex: 1; color: var(--text-secondary);">${search}</span>
-            </button>
-            <button type="button" class="dropdown-recent-remove" aria-label="Remove search">
-                <i class="fas fa-x"></i>
-            </button>
-        `;
-        
-        const textButton = item.querySelector('.dropdown-recent-text');
-        const removeBtn = item.querySelector('.dropdown-recent-remove');
-        
-        if (textButton) {
-            textButton.addEventListener('click', () => {
-                searchInput.value = search;
-                currentSearchQuery = search;
-                performSearch();
-                closeDropdown();
-            });
-        }
-        
-        if (removeBtn) {
-            removeBtn.addEventListener('click', (e) => {
-                e.stopPropagation();
-                recentSearches = recentSearches.filter(s => s !== search);
-                localStorage.setItem('recentSearches', JSON.stringify(recentSearches));
-                renderRecentSearches();
-            });
-        }
+
 
     // Clear content
     if (modalBody) {
@@ -1666,35 +1635,7 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     }
 
-// Open Project Modal
-projectCards.forEach(card => {
-    card.tabIndex = 0;
-    card.setAttribute('role', 'button');
-    card.setAttribute('aria-label', `Open ${card.querySelector('h3')?.textContent || 'project'}`);
 
-    const playButton = card.querySelector('.btn-play');
-    
-    if (playButton) {
-        playButton.addEventListener('click', (e) => {
-            e.stopPropagation();
-            const projectName = card.getAttribute('data-project');
-            openProject(projectName);
-        });
-    }
-
-    card.addEventListener('click', () => {
-        const projectName = card.getAttribute('data-project');
-        openProject(projectName);
-    });
-
-    card.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-            e.preventDefault();
-            const projectName = card.getAttribute('data-project');
-            openProject(projectName);
-        }
-    });
-});
     /* ── Activate item based on viewport center crossing timeline dots ── */
     var activeIdx = -1;
     var dots = document.querySelectorAll(".timeline-dot");

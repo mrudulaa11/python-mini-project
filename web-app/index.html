@@ -878,13 +878,18 @@
     <script src="js/projects/matrix-calculator.js"></script>
     <script src="js/projects/reverse-hangman.js"></script>
     <script defer src="js/projects/unit-converter.js"></script>
+    <script defer src="js/projects/budget-tracker.js"></script>
     <script defer src="js/projects.js"></script>
     <script defer src="js/cm-editor.js"></script>
     <script defer src="js/playground.js"></script>
     <script defer type="module" src="js/main.js"></script>
     <script defer src="js/hero-canvas.js"></script>
     <script>
-      lucide.createIcons();
+      document.addEventListener("DOMContentLoaded", function () {
+        if (typeof lucide !== "undefined") {
+          lucide.createIcons();
+        }
+      });
     </script>
 
     <!-- PROJECT LOADER - WITH FAVORITE BUTTONS -->
@@ -1193,6 +1198,13 @@
             category: "utilities",
             desc: "Converts values between different units",
             tags: "utility,tool",
+          },
+          {
+            project: "budget-tracker",
+            title: "Budget Tracker",
+            category: "utilities",
+            desc: "Track your income and expenses with visual breakdowns",
+            tags: "utility,finance,tracker,money",
           },
         ];
 

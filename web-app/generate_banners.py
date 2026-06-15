@@ -461,6 +461,20 @@ def generate_banner(name, category, filename):
         v_draw.ellipse([cx-35, cy-40, cx-15, cy-20], fill=color_accent) # toe 1
         v_draw.ellipse([cx-10, cy-50, cx+10, cy-30], fill=color_accent) # toe 2
         v_draw.ellipse([cx+15, cy-40, cx+35, cy-20], fill=color_accent) # toe 3
+    elif "budget" in n_lower or "tracker" in n_lower:
+        # Budget tracker: wallet / trend lines
+        cx, cy = 400, 225
+        v_draw.rounded_rectangle([cx-60, cy-50, cx+60, cy+50], radius=12, fill=(255,255,255,12), outline=color_accent, width=3)
+        # Strap
+        v_draw.rounded_rectangle([cx+20, cy-20, cx+65, cy+20], radius=6, fill=color_accent, outline=(255,255,255,100), width=2)
+        # Gold clasp/dot on strap
+        v_draw.ellipse([cx+40, cy-6, cx+52, cy+6], fill=(255, 215, 0))
+        # Growth lines
+        points = []
+        for x in range(150, 650, 20):
+            y = 310 + 40 * math.sin(x * 0.02) - (x - 150) * 0.2
+            points.append((x, y))
+        v_draw.line(points, fill=color_accent, width=3)
     else:
         # Default nice abstract waves
         points = []
@@ -560,6 +574,7 @@ projects = [
     ("AI Resume Analyzer", "utilities", "resume-analyzer.webp"),
     ("Caesar Cipher", "utilities", "caesar-cipher.webp"),
     ("Unit Converter", "utilities", "unit-converter.webp"),
+    ("Budget Tracker", "utilities", "budget-tracker.webp"),
 ]
 
 # Run generation
